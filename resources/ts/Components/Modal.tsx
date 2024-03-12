@@ -1,7 +1,16 @@
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-export default function Modal({ children, show = false, maxWidth = '2xl', closeable = true, onClose = () => {} }) {
+interface ModalProps {
+    children: ReactNode | ReactNode[];
+    show: boolean;
+    maxWidth?: string;
+    closeable?: boolean;
+    onClose: () => void;
+
+}
+
+export default function Modal({ children, show = false, maxWidth = '2xl', closeable = true, onClose = () => {} }:ModalProps) {
     const close = () => {
         if (closeable) {
             onClose();

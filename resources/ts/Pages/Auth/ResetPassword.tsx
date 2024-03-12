@@ -1,12 +1,17 @@
-import { useEffect } from "react";
-import GuestLayout from "resources/ts/Layouts/GuestLayout";
-import InputError from "resources/ts/Components/InputError";
-import InputLabel from "resources/ts/Components/InputLabel";
-import PrimaryButton from "resources/ts/Components/PrimaryButton";
-import TextInput from "resources/ts/Components/TextInput";
+import { ChangeEvent, FormEvent, useEffect } from "react";
 import { Head, useForm } from "@inertiajs/react";
+import InputLabel from "../../Components/InputLabel";
+import TextInput from "../../Components/TextInput";
+import Guest from "../../Layouts/GuestLayout";
+import InputError from "../../Components/InputError";
+import PrimaryButton from "../../Components/PrimaryButton";
 
-export default function ResetPassword({ token, email }) {
+interface ResetPasswordProps {
+    token: string;
+    email: string;
+}
+
+export default function ResetPassword({ token, email }:ResetPasswordProps) {
     const { data, setData, post, processing, errors, reset } = useForm({
         token: token,
         email: email,
@@ -20,14 +25,14 @@ export default function ResetPassword({ token, email }) {
         };
     }, []);
 
-    const submit = (e) => {
+    const submit = (e:FormEvent) => {
         e.preventDefault();
 
         post(route("password.store"));
     };
 
     return (
-        <GuestLayout>
+        <Guest>
             <Head title="Reset Password" />
 
             <form onSubmit={submit}>
@@ -41,7 +46,9 @@ export default function ResetPassword({ token, email }) {
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        onChange={(e) => setData("email", e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setData("email", e.currentTarget.value)
+                        }
                     />
 
                     <InputError message={errors.email} className="mt-2" />
@@ -58,7 +65,9 @@ export default function ResetPassword({ token, email }) {
                         className="mt-1 block w-full"
                         autoComplete="new-password"
                         isFocused={true}
-                        onChange={(e) => setData("password", e.target.value)}
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setData("password", e.currentTarget.value)
+                        }
                     />
 
                     <InputError message={errors.password} className="mt-2" />
@@ -76,8 +85,11 @@ export default function ResetPassword({ token, email }) {
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        onChange={(e) =>
-                            setData("password_confirmation", e.target.value)
+                        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                            setData(
+                                "password_confirmation",
+                                e.currentTarget.value
+                            )
                         }
                     />
 
@@ -93,6 +105,6 @@ export default function ResetPassword({ token, email }) {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        </Guest>
     );
 }

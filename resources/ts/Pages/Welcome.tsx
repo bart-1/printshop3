@@ -1,6 +1,12 @@
 import { Link, Head } from '@inertiajs/react';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+interface WelcomeProps {
+    auth: {user: string};
+    laravelVersion: string;
+    phpVersion: string;
+}
+
+export default function Welcome({ auth, laravelVersion, phpVersion }:WelcomeProps) {
     return (
         <>
             <Head title="Welcome" />
@@ -164,7 +170,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     </div>
 
                                     <h2 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">
-                                        Laravel News
+                                        Laravel News BLE BLE BLE
                                     </h2>
 
                                     <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">

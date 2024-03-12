@@ -1,15 +1,21 @@
-import AuthenticatedLayout from "resources/ts/Layouts/AuthenticatedLayout";
+import Authenticated from "../Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-export default function Dashboard({ auth }) {
+    const header = (
+        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+            Dashboard
+        </h2>
+    );
+
+interface DashboardProps {
+    auth: { user: {name: string, email: string}};
+ }
+export default function Dashboard({ auth }:DashboardProps) {
+
     return (
-        <AuthenticatedLayout
+        <Authenticated
             user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard
-                </h2>
-            }
+            header={header}
         >
             <Head title="Dashboard" />
 
@@ -22,6 +28,6 @@ export default function Dashboard({ auth }) {
                     </div>
                 </div>
             </div>
-        </AuthenticatedLayout>
+        </Authenticated>
     );
 }

@@ -1,4 +1,7 @@
-export default function DangerButton({ className = '', disabled, children, ...props }) {
+import { ButtonProps } from "./PrimaryButton";
+
+
+export default function DangerButton({ className = '', disabled, children, ...props }:ButtonProps) {
     return (
         <button
             {...props}

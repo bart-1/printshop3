@@ -1,14 +1,14 @@
-import { useRef } from "react";
-import InputError from "resources/ts/Components/InputError";
-import InputLabel from "resources/ts/Components/InputLabel";
-import PrimaryButton from "resources/ts/Components/PrimaryButton";
-import TextInput from "resources/ts/Components/TextInput";
+import { FormEvent, useRef } from "react";
 import { useForm } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
+import InputLabel from "../../../Components/InputLabel";
+import InputError from "../../../Components/InputError";
+import PrimaryButton from "../../../Components/PrimaryButton";
+import TextInput, { TextInputProps } from "../../../Components/TextInput";
 
 export default function UpdatePasswordForm({ className = "" }) {
-    const passwordInput = useRef();
-    const currentPasswordInput = useRef();
+    const passwordInput = useRef<HTMLInputElement>(null);
+    const currentPasswordInput = useRef<HTMLInputElement>(null);
 
     const {
         data,
@@ -24,19 +24,19 @@ export default function UpdatePasswordForm({ className = "" }) {
         password_confirmation: "",
     });
 
-    const updatePassword = (e) => {
+    const updatePassword = (e:FormEvent) => {
         e.preventDefault();
 
         put(route("password.update"), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
-                if (errors.password) {
+                if (errors.password && passwordInput.current !== null ) {
                     reset("password", "password_confirmation");
-                    passwordInput.current.focus();
+                    passwordInput['current'].focus();
                 }
 
-                if (errors.current_password) {
+                if (errors.current_password && currentPasswordInput.current !== null) {
                     reset("current_password");
                     currentPasswordInput.current.focus();
                 }

@@ -1,15 +1,22 @@
-import InputError from "resources/ts/Components/InputError";
-import InputLabel from "resources/ts/Components/InputLabel";
-import PrimaryButton from "resources/ts/Components/PrimaryButton";
-import TextInput from "resources/ts/Components/TextInput";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import { Transition } from "@headlessui/react";
+import InputLabel from "../../../Components/InputLabel";
+import InputError from "../../../Components/InputError";
+import PrimaryButton from "../../../Components/PrimaryButton";
+import { SyntheticEvent } from "react";
+import TextInput from "../../../Components/TextInput";
+
+interface UpdateProfileInformationProps {
+    className?: string;
+    mustVerifyEmail: boolean;
+    status: string;
+}
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
     className = "",
-}) {
+}:UpdateProfileInformationProps) {
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
@@ -18,7 +25,7 @@ export default function UpdateProfileInformation({
             email: user.email,
         });
 
-    const submit = (e) => {
+    const submit = (e:SyntheticEvent) => {
         e.preventDefault();
 
         patch(route("profile.update"));

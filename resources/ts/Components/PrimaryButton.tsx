@@ -1,4 +1,12 @@
-export default function PrimaryButton({ className = '', disabled, children, ...props }) {
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    className?: string;
+    disabled?: boolean;
+    children: ReactNode | ReactNode[];
+}
+
+export default function PrimaryButton({ className = '', disabled, children, ...props }:ButtonProps) {
     return (
         <button
             {...props}

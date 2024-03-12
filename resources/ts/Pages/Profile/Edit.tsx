@@ -1,10 +1,16 @@
-import AuthenticatedLayout from "resources/ts/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import DeleteUserForm from "./Partials/DeleteUserForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 import { Head } from "@inertiajs/react";
 
-export default function Edit({ auth, mustVerifyEmail, status }) {
+interface EditProps {
+    auth: { user: { name: string; email: string } };
+    mustVerifyEmail: boolean;
+    status: string;
+}
+
+export default function Edit({ auth, mustVerifyEmail, status }:EditProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}

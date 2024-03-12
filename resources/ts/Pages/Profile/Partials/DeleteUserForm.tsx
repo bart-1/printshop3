@@ -1,15 +1,15 @@
-import { useRef, useState } from "react";
-import DangerButton from "resources/ts/Components/DangerButton";
-import InputError from "resources/ts/Components/InputError";
-import InputLabel from "resources/ts/Components/InputLabel";
-import Modal from "resources/ts/Components/Modal";
-import SecondaryButton from "resources/ts/Components/SecondaryButton";
-import TextInput from "resources/ts/Components/TextInput";
+import { FormEvent, useRef, useState } from "react";
 import { useForm } from "@inertiajs/react";
+import DangerButton from "../../../Components/DangerButton";
+import Modal from "../../../Components/Modal";
+import InputLabel from "../../../Components/InputLabel";
+import TextInput from "../../../Components/TextInput";
+import InputError from "../../../Components/InputError";
+import SecondaryButton from "../../../Components/SecondaryButton";
 
 export default function DeleteUserForm({ className = "" }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-    const passwordInput = useRef();
+    const passwordInput = useRef<HTMLInputElement>(null);
 
     const {
         data,
@@ -26,13 +26,12 @@ export default function DeleteUserForm({ className = "" }) {
         setConfirmingUserDeletion(true);
     };
 
-    const deleteUser = (e) => {
+    const deleteUser = (e:FormEvent) => {
         e.preventDefault();
-
         destroy(route("profile.destroy"), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            onError: () => passwordInput.current.focus(),
+            onError: () => passwordInput.current !==null && passwordInput.current.focus(),
             onFinish: () => reset(),
         });
     };

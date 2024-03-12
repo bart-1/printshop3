@@ -1,11 +1,17 @@
-import { useState } from "react";
-import ApplicationLogo from "resources/ts/Components/ApplicationLogo";
-import Dropdown from "resources/ts/Components/Dropdown";
-import NavLink from "resources/ts/Components/NavLink";
-import ResponsiveNavLink from "resources/ts/Components/ResponsiveNavLink";
+import { ReactNode, useState } from "react";
 import { Link } from "@inertiajs/react";
+import ApplicationLogo from "../Components/ApplicationLogo";
+import NavLink from "../Components/NavLink";
+import Dropdown from "../Components/Dropdown";
+import ResponsiveNavLink from "../Components/ResponsiveNavLink";
 
-export default function Authenticated({ user, header, children }) {
+interface AuthenticatedLayoutProps {
+    user: { name: string; email: string };
+    header: ReactNode | ReactNode[];
+    children: ReactNode | ReactNode[];
+}
+
+export default function AuthenticatedLayout({ user, header, children }:AuthenticatedLayoutProps) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 

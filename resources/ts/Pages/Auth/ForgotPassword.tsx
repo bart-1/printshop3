@@ -1,15 +1,20 @@
-import GuestLayout from "resources/ts/Layouts/GuestLayout";
-import InputError from "resources/ts/Components/InputError";
-import PrimaryButton from "resources/ts/Components/PrimaryButton";
-import TextInput from "resources/ts/Components/TextInput";
+import InputError from "../../Components/InputError";
+import PrimaryButton from "../../Components/PrimaryButton";
+import TextInput from "../../Components/TextInput";
+import GuestLayout from "../../Layouts/GuestLayout";
 import { Head, useForm } from "@inertiajs/react";
+import { FormEvent } from "react";
 
-export default function ForgotPassword({ status }) {
+interface ForgotPasswordProps {
+    status: string;
+}
+
+export default function ForgotPassword({ status }:ForgotPasswordProps) {
     const { data, setData, post, processing, errors } = useForm({
         email: "",
     });
 
-    const submit = (e) => {
+    const submit = (e:FormEvent) => {
         e.preventDefault();
 
         post(route("password.email"));
