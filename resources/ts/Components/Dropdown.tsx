@@ -1,7 +1,21 @@
-import { useState, createContext, useContext, Fragment, ReactNode, Dispatch, SetStateAction, DetailedHTMLProps, HTMLAttributes } from 'react';
-import { Link } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
-import { BaseInertiaLinkProps, InertiaLink, InertiaLinkProps } from '@inertiajs/inertia-react';
+import {
+    useState,
+    createContext,
+    useContext,
+    Fragment,
+    ReactNode,
+    Dispatch,
+    SetStateAction,
+    DetailedHTMLProps,
+    HTMLAttributes,
+} from "react";
+import { Link } from "@inertiajs/react";
+import { Transition } from "@headlessui/react";
+import {
+    BaseInertiaLinkProps,
+    InertiaLink,
+    InertiaLinkProps,
+} from "@inertiajs/inertia-react";
 
 interface DropDownContextProps {
     open: boolean;
@@ -9,14 +23,15 @@ interface DropDownContextProps {
     toggleOpen: () => void;
 }
 
-
-const DropDownContext = createContext<DropDownContextProps>({} as DropDownContextProps);
+const DropDownContext = createContext<DropDownContextProps>(
+    {} as DropDownContextProps
+);
 
 interface NodeProps {
     children: ReactNode | ReactNode[];
 }
 
-const Dropdown = ({ children }:NodeProps) => {
+const Dropdown = ({ children }: NodeProps) => {
     const [open, setOpen] = useState(false);
 
     const toggleOpen = () => {
@@ -31,14 +46,18 @@ const Dropdown = ({ children }:NodeProps) => {
 };
 
 const Trigger = ({ children }: NodeProps) => {
-
     const { open, setOpen, toggleOpen } = useContext(DropDownContext);
 
     return (
         <>
             <div onClick={toggleOpen}>{children}</div>
 
-            {open && <div className="fixed inset-0 z-40" onClick={() => setOpen(false)}></div>}
+            {open && (
+                <div
+                    className="fixed inset-0 z-40"
+                    onClick={() => setOpen(false)}
+                ></div>
+            )}
         </>
     );
 };
@@ -46,17 +65,15 @@ const Trigger = ({ children }: NodeProps) => {
 interface ContentProps extends NodeProps {
     align?: string;
     width?: string;
-    contentClasses?: "py-1 bg-white";
+    className?: string;
 }
 
-const Content = (
-    {
-        align = "right",
-        width = "48",
-        contentClasses = "py-1 bg-white",
-        children,
-    }:ContentProps
-) => {
+const Content = ({
+    align = "right",
+    width = "48",
+    className = "py-1 bg-white",
+    children,
+}: ContentProps) => {
     const { open, setOpen } = useContext(DropDownContext);
 
     let alignmentClasses = "origin-top";
@@ -92,7 +109,7 @@ const Content = (
                     <div
                         className={
                             `rounded-md ring-1 ring-black ring-opacity-5 ` +
-                            contentClasses
+                            className
                         }
                     >
                         {children}
@@ -104,20 +121,30 @@ const Content = (
 };
 
 interface DropDownLinkProps extends NodeProps {
-    inertiaProps?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & InertiaLinkProps;
+    inertiaProps?: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> &
+        InertiaLinkProps;
     className?: string;
     href?: string;
     method?: "get" | "post";
     as?: string;
 }
 
-const DropdownLink = ({ className = '', children, href, ...inertiaProps }:DropDownLinkProps) => {
+const DropdownLink = ({
+    className = "",
+    children,
+    href,
+    as,
+    method,
+    ...inertiaProps
+}: DropDownLinkProps) => {
     return (
         <Link
+            as={as}
+            method={method}
             {...inertiaProps}
-            href={inertiaProps.inertiaProps?.href ?? ''}
+            href={inertiaProps.inertiaProps?.href ?? ""}
             className={
-                'block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out ' +
+                "block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out " +
                 className
             }
         >
