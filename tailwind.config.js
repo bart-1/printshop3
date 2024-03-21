@@ -15,6 +15,14 @@ export default {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                mygray: {
+                    lighter: "#333335",
+                    normal: "#1e1e1f",
+                    darker: "#19191a",
+                },
+                myyellowgray: "#4e4d41",
+            },
         },
     },
 
