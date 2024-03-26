@@ -1,18 +1,18 @@
-import { ChangeEvent, FormEvent, useEffect } from "react";
+import { ChangeEvent, FormEvent, ReactNode, useEffect } from "react";
 import { Head, Link, useForm } from "@inertiajs/react";
-import GuestLayout from "../../Layouts/GuestLayout";
 import InputLabel from "../../Components/InputLabel";
 import TextInput from "../../Components/TextInput";
 import InputError from "../../Components/InputError";
 import Checkbox from "../../Components/Checkbox";
 import PrimaryButton from "../../Components/PrimaryButton";
+import MasterLayout from "../../Layouts/MasterLayout";
 
 interface LoginProps {
     status: string;
     canResetPassword: boolean;
 }
 
-export default function Login({ status, canResetPassword }:LoginProps) {
+const Login = ({ status, canResetPassword }:LoginProps) => {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
@@ -32,7 +32,7 @@ export default function Login({ status, canResetPassword }:LoginProps) {
     };
 
     return (
-        <GuestLayout>
+        <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-gray-100 dark:bg-mygray-lighter shadow-md overflow-hidden sm:rounded-lg">
             <Head title="Log in" />
 
             {status && (
@@ -43,7 +43,11 @@ export default function Login({ status, canResetPassword }:LoginProps) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel
+                        htmlFor="email"
+                        value="Email"
+                        className="dark:text-white"
+                    />
 
                     <TextInput
                         id="email"
@@ -61,8 +65,12 @@ export default function Login({ status, canResetPassword }:LoginProps) {
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                <div className="mt-4 ">
+                    <InputLabel
+                        htmlFor="password"
+                        value="Password"
+                        className="dark:text-white"
+                    />
 
                     <TextInput
                         id="password"
@@ -88,7 +96,7 @@ export default function Login({ status, canResetPassword }:LoginProps) {
                                 setData("remember", e.currentTarget.checked)
                             }
                         />
-                        <span className="ms-2 text-sm text-gray-600">
+                        <span className="ms-2 text-sm text-gray-600 dark:text-white">
                             Remember me
                         </span>
                     </label>
@@ -98,7 +106,7 @@ export default function Login({ status, canResetPassword }:LoginProps) {
                     {canResetPassword && (
                         <Link
                             href={route("password.request")}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:text-white"
                         >
                             Forgot your password?
                         </Link>
@@ -109,6 +117,13 @@ export default function Login({ status, canResetPassword }:LoginProps) {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        </div>
     );
 }
+
+Login.layout = (page: ReactNode | ReactNode[]) => (
+    <MasterLayout children={page} />
+);
+
+
+export default Login;

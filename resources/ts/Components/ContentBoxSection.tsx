@@ -13,22 +13,25 @@ const ContentBoxSection = ({ icon, children, link, title }: BoxModuleProps) => {
         <>
             <a
                 href={link ? route(link) : ""}
-                className="scale-100 p-6 bg-white dark:bg-mygray-darker/50 dark:bg-gradient-to-bl from-mygray-lighter/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-black/60 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 border-[1px] border-mygray-normal hover:border-red-500"
+                className="scale-100 p-6 bg-slate-300 dark:bg-mygray-darker/50 dark:bg-gradient-to-bl from-mygray-lighter/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-black/60 flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 border-[1px] border-mygray-normal hover:border-cyan-500 hover:dark:border-red-500"
             >
                 <div>
                     <div className="h-16 w-16 bg-red-50 dark:bg-red-800/20 flex items-center justify-center rounded-full">
                         <IconContext.Provider
-                            value={{ className: "w-7 h-7 text-red-500" }}
+                            value={{
+                                className:
+                                    "w-7 h-7 text-indigo-900 dark:text-red-500",
+                            }}
                         >
                             {icon}
                         </IconContext.Provider>
                     </div>
 
-                    <h2 className="mt-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                    <h2 className="mt-6 text-2xl font-semibold text-indigo-950 dark:text-white">
                         {title ? title : ""}
                     </h2>
 
-                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-md leading-relaxed">
+                    <p className="mt-4 text-gray-700 dark:text-gray-400 text-md leading-relaxed">
                         {children}
                     </p>
                 </div>
