@@ -33,7 +33,9 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+
             ],
+            'version' => strval(env("APP_VER"))
         ];
     }
 }
