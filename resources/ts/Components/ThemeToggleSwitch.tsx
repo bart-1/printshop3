@@ -3,13 +3,24 @@ import { CgToggleOff, CgToggleOn } from "react-icons/cg";
 import { BsSun, BsSunFill, BsMoon, BsMoonFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 
+
+const localStorageTheme = localStorage.getItem("theme");
+const isDark = localStorageTheme === "dark" ? true : false;
+
+
+
 const ThemeToggleSwitch = () => {
-    const [colorTheme, setColorTheme] = useState(false);
+    const [colorTheme, setColorTheme] = useState(isDark);
 
     useEffect(() => {
-        colorTheme
-            ? document.documentElement.classList.add("dark")
-            : document.documentElement.classList.remove("dark");
+        if (colorTheme) {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("theme", "dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("theme", "light");
+
+        }
     }, [colorTheme]);
 
     return (

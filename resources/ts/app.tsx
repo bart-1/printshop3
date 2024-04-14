@@ -7,6 +7,25 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
+
+import React, { ReactNode } from 'react';
+import ThemeToggleSwitch from "./Components/ThemeToggleSwitch";
+
+interface ThemeProps {
+    children: ReactNode | ReactNode[];
+}
+
+const Theme = ({ children }: ThemeProps) => {
+
+        return (
+            <>
+                <ThemeToggleSwitch />
+                {children}
+            </>
+        )
+};
+export default Theme;
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
@@ -17,7 +36,9 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
 
-        root.render(<App {...props} />);
+        root.render(<Theme>
+            <App {...props} />
+        </Theme>);
     },
     progress: {
         color: "#4B5563",
