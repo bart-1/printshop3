@@ -48,14 +48,6 @@ return new class extends Migration
    $table->integer('a4_scan_hand_price');
    $table->integer('cd_archive_price');
 
-   //business cards
-   $table->integer('bc_print_tresholds');
-   $table->integer('bc40_print_prices');
-   $table->integer('bc44_print_prices');
-   $table->integer('bc_lamin_prices');
-   $table->integer('bc_lamin_mix_prices');
-   $table->integer('bc_lamin_st_prices');
-
    //large format printing
    $table->integer('lf_print_min_price');
    $table->integer('lf_print_tresholds');
@@ -142,6 +134,21 @@ return new class extends Migration
    $table->integer('stand_spider_prices');
 
   });
+  Schema::create('bc_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+
+//business cards
+   $table->integer('tresholds');
+   $table->integer('one_side');
+   $table->integer('both_side');
+   $table->integer('mat');
+   $table->integer('gloss');
+   $table->integer('mix');
+   $table->integer('soft');
+   $table->integer('none');
+
+  });
  }
 
  /**
@@ -150,5 +157,6 @@ return new class extends Migration
  public function down(): void
  {
   Schema::dropIfExists('price_list');
+  Schema::dropIfExists('bc_prices');
  }
 };

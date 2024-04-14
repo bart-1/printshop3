@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CalcBcController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,7 +28,10 @@ Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::post('/welcome', [AuthenticatedSessionController::class, 'destroy']
 )->name('welcome.logout');
+Route::post('/calcbc', [AuthenticatedSessionController::class, 'destroy']
+)->name('calcbc.logout');
 
+Route::get('/calcbc', [CalcBcController::class, 'index'])->name('calcbc');
 
 
 Route::get('/dashboard', function () {
