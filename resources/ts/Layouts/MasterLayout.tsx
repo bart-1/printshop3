@@ -16,6 +16,8 @@ export interface InertiaProps extends PageProps {
             id: number;
             name: string;
             email: string;
+            discount: number;
+            discount_products_list: string;
             created_at: Date;
             updated_at: Date;
             email_verified_at: string;
@@ -26,9 +28,10 @@ export interface InertiaProps extends PageProps {
 const MasterLayout = ({ children }: MasterLayoutProps) => {
     const { auth, version } = usePage<InertiaProps>().props;
 
+
+
     return (
         <>
-            <ThemeToggleSwitch />
             <div className="sm:fixed sm:top-0 sm:right-0 p-8 text-end">
                 {auth.user ? (
                     <>
