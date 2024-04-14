@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Application as Application;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class WelcomeController extends Controller
 {
 
-public function index () {
-    return Inertia::render('Welcome', [
-  'LaravelVersion' => Application::VERSION,
-  'phpVersion'     => PHP_VERSION,
+ public function index()
+ {
+  return Inertia::render('Welcome', [
+   'LaravelVersion' => Application::VERSION,
+   'phpVersion'     => PHP_VERSION,
 
-    ]);
-}
+  ]);
+ }
 }
