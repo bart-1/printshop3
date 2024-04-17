@@ -28,8 +28,6 @@ export interface InertiaProps extends PageProps {
 const MasterLayout = ({ children }: MasterLayoutProps) => {
     const { auth, version } = usePage<InertiaProps>().props;
 
-
-
     return (
         <>
             <div className="sm:fixed sm:top-0 sm:right-0 p-8 text-end">
