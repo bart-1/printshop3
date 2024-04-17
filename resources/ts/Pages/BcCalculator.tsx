@@ -1,28 +1,34 @@
-import { ChangeEvent, FormEvent, ReactNode, useEffect, useState } from "react";
+import { ChangeEvent, ReactNode, useEffect, useState } from "react";
 import ContentBoxSection from "../Components/ContentBoxSection";
 import RadioInputsSection from "../Components/RadioInputsSection";
 import { Head, Link, usePage } from "@inertiajs/react";
 import MasterLayout, { InertiaProps } from "../Layouts/MasterLayout";
+import { discontTester, findElemntInJSONString } from "../helpers";
 
 interface BcCalculatorProps {
     className: string;
 }
 
-export type Print = "one_side" | "both_side";
-export type Laminate = "mat" | "gloss" | "soft" | "none" | "mix";
+export type Print = "bc_40_print" | "bc_44_print";
+export type Laminate =
+    | "bc_lamin_mat"
+    | "bc_lamin_gloss"
+    | "bc_lamin_soft"
+    | "bc_lamin_none"
+    | "bc_lamin_mix";
 
 type PricesBC = {
     id: number;
     // created_at: string | null;
     // updated_at: string | null;
     tresholds: number;
-    one_side: number;
-    both_side: number;
-    mat: number;
-    gloss: number;
-    mix: number;
-    none: number;
-    soft: number;
+    bc_40_print: number;
+    bc_44_print: number;
+    bc_lamin_mat: number;
+    bc_lamin_gloss: number;
+    bc_lamin_mix: number;
+    bc_lamin_none: number;
+    bc_lamin_soft: number;
 };
 interface Prices extends InertiaProps {
     prices: PricesBC[];
@@ -38,19 +44,34 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
     const { auth } = usePage<InertiaProps>().props;
 
     useEffect(() => {
-        setPrintSides("one_side");
-        setLaminate("none");
+        setPrintSides("bc_40_print");
+        setLaminate("bc_lamin_none");
     }, []);
+
+
 
     useEffect(() => {
         const quantityFilter = prices.filter((el) => el.tresholds === quantity);
+        const list = auth.user !== null ? auth.user.discount_products_list : null;
+        const discount = auth.user !== null ? auth.user.discount : null;
 
 
-        if(printSides && laminate)
-        setResult(
-            quantityFilter[0][printSides] + quantityFilter[0][laminate]
-        );
-
+        if (printSides && laminate) {
+            setResult(
+                quantityFilter[0][printSides] *
+                    discontTester(
+                        printSides,
+                        list,
+                        discount
+                    ) +
+                    quantityFilter[0][laminate] *
+                        discontTester(
+                            laminate,
+                            list,
+                           discount
+                        )
+            );
+        }
     }, [quantity, printSides, laminate]);
 
     return (
@@ -92,16 +113,16 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
                         legend="print"
                         output={(e) => setPrintSides(e as keyof PricesBC)}
                         className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex"
-                        defaultCheckedValue="one_side"
+                        defaultCheckedValue="bc_40_print"
                         radioInputsGroup={[
                             {
-                                value: "one_side",
+                                value: "bc_40_print",
                                 id: "40",
                                 className: "",
                                 fieldName: "4+0",
                             },
                             {
-                                value: "both_side",
+                                value: "bc_44_print",
                                 id: "44",
                                 className: "",
                                 fieldName: "4+4",
@@ -112,34 +133,34 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
                         legend="foil laminate 1+1"
                         output={(e) => setLaminate(e as keyof PricesBC)}
                         className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex"
-                        defaultCheckedValue="none"
+                        defaultCheckedValue="bc_lamin_none"
                         radioInputsGroup={[
                             {
-                                value: "none",
+                                value: "bc_lamin_none",
                                 id: "mone",
                                 className: "",
                                 fieldName: "none",
                             },
                             {
-                                value: "mat",
+                                value: "bc_lamin_mat",
                                 id: "mat",
                                 className: "",
                                 fieldName: "mat",
                             },
                             {
-                                value: "gloss",
+                                value: "bc_lamin_gloss",
                                 id: "gloss",
                                 className: "",
                                 fieldName: "gloss",
                             },
                             {
-                                value: "mix",
+                                value: "bc_lamin_mix",
                                 id: "gloss",
                                 className: "",
                                 fieldName: "mat+gloss",
                             },
                             {
-                                value: "soft",
+                                value: "bc_lamin_soft",
                                 id: "soft",
                                 className: "",
                                 fieldName: "soft touch",
@@ -148,11 +169,19 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
                     />
 
                     <ContentBoxSection className="mt-4">
-                        <div className="text-4xl">PLN Brutto: {result},- </div>
+                        <div className="text-4xl">PLN Brutto: {parseFloat(String(result)).toFixed(2)},- </div>
                         <div className="text-xl">
                             PLN Netto:{" "}
                             {parseFloat(String(result / 1.23)).toFixed(2)},-{" "}
                         </div>
+                        {auth.user !== null && auth.user.discount > 0 ? (
+                            <div className=" right-0 ">
+                                Twój rabat STAŁEGO KLIENTA został uwzględniony{" "}
+                                {auth.user.discount}%
+                            </div>
+                        ) : (
+                            ""
+                        )}
                     </ContentBoxSection>
                 </ContentBoxSection>
             </div>

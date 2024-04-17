@@ -140,13 +140,13 @@ return new class extends Migration
 
 //business cards
    $table->integer('tresholds');
-   $table->integer('one_side');
-   $table->integer('both_side');
-   $table->integer('mat');
-   $table->integer('gloss');
-   $table->integer('mix');
-   $table->integer('soft');
-   $table->integer('none');
+   $table->integer('bc_40_print');
+   $table->integer('bc_44_print');
+   $table->integer('bc_lamin_mat');
+   $table->integer('bc_lamin_gloss');
+   $table->integer('bc_lamin_mix');
+   $table->integer('bc_lamin_soft');
+   $table->integer('bc_lamin_none');
 
   });
  }
