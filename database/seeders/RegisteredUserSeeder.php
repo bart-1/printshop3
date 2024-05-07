@@ -17,6 +17,7 @@ class RegisteredUserSeeder extends Seeder
    'name'                   => "bfagencja",
    'email'                  => "bf@test.pl",
    'password'               => Hash::make('test'),
+    'role_id'           => 3, // User
    'discount'               => 10,
    'discount_products_list' => "[
 'a4_black_min',
@@ -64,10 +65,7 @@ class RegisteredUserSeeder extends Seeder
 
   ]);
 
-  DB::table('users')->insert(['name' => "bart",
-   'email'                            => "studio@dziwnykot.pl",
-   'password'                         => Hash::make('testtest'),
-  ]);
+
 
  }
 }
