@@ -25,3 +25,36 @@ export const discontTester = (
         return discountValueTransformer;
     } else return 1;
 };
+
+/**It calculate how many products can be printed on specific sheet
+ *
+ * @param sheetH dimension of longer edge of print sheet
+ * @param sheetW dimension of shorter edge of print sheet
+ * @param productNettoH height of final product
+ * @param productNettoW width of final product
+ * @param safeSheetMargin safe margin of printer
+ * @param bleed bleed added to product dimensions
+ * @returns
+ */
+
+
+
+export const calcImposer = (sheetH:number, sheetW:number, productNettoH:number, productNettoW:number, safeSheetMargin=10, bleed=4):number => {
+    switch (true) {
+        case sheetH - safeSheetMargin <= 0 || sheetW - safeSheetMargin <= 0:
+            return 0;
+        case productNettoH * productNettoW > (sheetH - safeSheetMargin) * (sheetW - safeSheetMargin):
+            return 0;
+    }
+
+    const wImpose = Math.floor(sheetW / (productNettoW+bleed));
+    const hImpose = Math.floor(sheetH / (productNettoH+bleed));
+    const wImposeInverted = Math.floor(sheetH / (productNettoW+bleed));
+    const hImposeInverted = Math.floor(sheetW /( productNettoH+bleed));
+
+    if (wImpose * hImpose > wImposeInverted * hImposeInverted)
+        return wImpose * hImpose;
+    else
+        return wImposeInverted * hImposeInverted;
+
+}
