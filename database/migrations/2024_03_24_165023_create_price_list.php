@@ -137,7 +137,7 @@ return new class extends Migration
   Schema::create('bc_prices', function (Blueprint $table) {
    $table->id();
    $table->timestamps();
-   $table->integer('thresholds');
+   $table->integer('threshold');
    $table->integer('bc_40_print');
    $table->integer('bc_44_print');
    $table->integer('bc_lamin_mat');
@@ -150,15 +150,16 @@ return new class extends Migration
   Schema::create('a4_substrate_prices', function (Blueprint $table) {
    $table->id();
    $table->timestamps();
-   $table->string('types');
-   $table->integer('prices');
+   $table->string('name');
+   $table->integer('price');
 
   });
   Schema::create('a4_print_prices', function (Blueprint $table) {
    $table->id();
    $table->timestamps();
-   $table->integer('thresholds');
-   $table->integer('prices');
+   $table->integer('threshold_from');
+   $table->integer('threshold_to');
+   $table->integer('price');
 
 
   });
