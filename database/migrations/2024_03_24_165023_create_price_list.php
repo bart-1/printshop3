@@ -25,8 +25,6 @@ return new class extends Migration
    $table->integer('a4_color_print_prices');
    $table->integer('a4_color_gray_print_prices');
    $table->integer('a4_color_plot_cut_price');
-   $table->string('a4_papers', 30);
-   $table->integer('a4_paper_prices');
 
    //color copy
    $table->integer('a4_color_copy_thresholds');
@@ -48,56 +46,7 @@ return new class extends Migration
    $table->integer('a4_scan_hand_price');
    $table->integer('cd_archive_price');
 
-   //large format printing
-   $table->integer('lf_print_min_price');
-   $table->integer('lf_print_thresholds');
-   $table->integer('lf_paper_print_prices');
-   $table->integer('lf_foil_print_prices');
-   $table->integer('lf_foil_ed_print_prices');
-   $table->integer('lf_block_print_prices');
-   $table->integer('lf_canvas_print_prices');
-
-   //plot cut
-   $table->integer('lf_plot_cut__min_price');
-   $table->integer('lf_plot_cut_price');
-   $table->integer('lf_non_print_cut_thresholds');
-   $table->integer('lf_non_print_cut_price');
-   $table->integer('lf_removal_unused_foil_price');
-   $table->integer('lf_transfer_foil_price');
-
    //boards
-   $table->integer('pcv3_price');
-   $table->integer('pcv5_price');
-   $table->integer('magnetic_price');
-   $table->integer('kappa5_price');
-   $table->integer('dibond_price');
-   $table->integer('second_side_price');
-
-   //lamination
-   $table->integer('roll_lamin_min_price');
-   $table->integer('lf_roll_lamin_price');
-   $table->integer('lamin_thresholds');
-   $table->integer('a4_roll_lamin_prices');
-   $table->integer('a4_roll_lamin_st_prices');
-   $table->integer('a3_100_lamin_prices');
-   $table->integer('a3_250_lamin_prices');
-   $table->integer('a4_100_lamin_prices');
-   $table->integer('a4_250_lamin_prices');
-   $table->integer('a5_100_lamin_prices');
-   $table->integer('a5_250_lamin_prices');
-   $table->integer('a6_100_lamin_prices');
-   $table->integer('a6_250_lamin_prices');
-   $table->integer('bc_100_lamin_prices');
-   $table->integer('bc_250_lamin_prices');
-
-   //introligatory
-   $table->integer('intro_thresholds');
-   $table->integer('fold_prices');
-   $table->integer('staple_prices');
-   $table->integer('staple_binder_prices');
-   $table->integer('cut_price');
-   $table->integer('hole_prices');
-   $table->integer('rounded_corners_prices');
 
    //binding
    $table->integer('binding_discount_thresholds');
@@ -154,13 +103,93 @@ return new class extends Migration
    $table->integer('price');
 
   });
-  Schema::create('a4_print_prices', function (Blueprint $table) {
+  Schema::create('a4_color_print_prices', function (Blueprint $table) {
    $table->id();
    $table->timestamps();
    $table->integer('threshold_from');
    $table->integer('threshold_to');
    $table->integer('price');
 
+  });
+  Schema::create('fold_staple_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+   $table->integer('threshold_from');
+   $table->integer('threshold_to');
+   $table->integer('fold');
+   $table->integer('staple');
+   $table->integer('binder_staple');
+
+  });
+  Schema::create('plotter_cut_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+   $table->integer('plotter_cut');
+   $table->integer('plotter_A3_cut');
+   $table->integer('plotter_A3_max_cut');
+   $table->integer('removal_foil');
+   $table->integer('transfer_foil_m2');
+
+  });
+  Schema::create('bindery_cut_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+   $table->integer('cut_1h');
+   $table->integer('cut_boards_1h');
+
+  });
+  Schema::create('min_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+   $table->integer('small_cut_min');
+   $table->integer('cut_min');
+   $table->integer('cut_over_a7_min');
+   $table->integer('roll_lamin_min');
+   $table->integer('plotter_cut_min');
+   $table->integer('laser_cut_min');
+
+  });
+  Schema::create('lamination_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+   $table->integer('threshold_from');
+   $table->integer('threshold_to');
+
+   $table->integer('a4_roll_mat');
+   $table->integer('a4_roll_gloss');
+   $table->integer('a4_roll_soft');
+   $table->integer('a3_100mic');
+   $table->integer('a3_250mic');
+   $table->integer('a4_100mic');
+   $table->integer('a4_250mic');
+   $table->integer('a5_100mic');
+   $table->integer('a5_250mic');
+   $table->integer('a6_100mic');
+   $table->integer('a6_250mic');
+   $table->integer('bc_200mic');
+
+  });
+  Schema::create('large_format_color_print_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+   $table->integer('threshold_from');
+   $table->integer('threshold_to');
+   $table->integer('paper');
+   $table->integer('foil');
+   $table->integer('foil_ed');
+   $table->integer('blockout');
+   $table->integer('canvas');
+
+  });
+  Schema::create('boards_prices', function (Blueprint $table) {
+   $table->id();
+   $table->timestamps();
+   $table->integer('pcv3');
+   $table->integer('pcv5');
+   $table->integer('magnetic');
+   $table->integer('kappa5');
+   $table->integer('dibond');
+   $table->integer('second_side');
 
   });
  }
@@ -172,7 +201,15 @@ return new class extends Migration
  {
   Schema::dropIfExists('price_list');
   Schema::dropIfExists('bc_prices');
+  Schema::dropIfExists('a4_color_print_prices');
   Schema::dropIfExists('a4_print_prices');
   Schema::dropIfExists('a4_substrate_prices');
+  Schema::dropIfExists('min_prices');
+  Schema::dropIfExists('plotter_cut_prices');
+  Schema::dropIfExists('bindery_cut_prices');
+  Schema::dropIfExists('fold_staple_prices');
+  Schema::dropIfExists('lamination_prices');
+  Schema::dropIfExists('large_format_color_print_prices');
+  Schema::dropIfExists('boards_prices');
  }
 };
