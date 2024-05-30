@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CalcBcController;
+use App\Http\Controllers\CalcSmallFormatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\WelcomeController;
@@ -32,6 +33,11 @@ Route::post('/calcbc', [AuthenticatedSessionController::class, 'destroy']
 )->name('calcbc.logout');
 
 Route::get('/calcbc', [CalcBcController::class, 'index'])->name('calcbc');
+
+Route::post('/sfcolorprint', [AuthenticatedSessionController::class, 'destroy']
+)->name('sfcolorprint.logout');
+
+Route::get('/sfcolorprint', [CalcSmallFormatController::class, 'index'])->name('sfcolorprint');
 
 
 Route::get('/dashboard', function () {
