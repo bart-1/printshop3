@@ -21,7 +21,7 @@ type PricesBC = {
     id: number;
     // created_at: string | null;
     // updated_at: string | null;
-    tresholds: number;
+    threshold: number;
     bc_40_print: number;
     bc_44_print: number;
     bc_lamin_mat: number;
@@ -51,7 +51,7 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
 
 
     useEffect(() => {
-        const quantityFilter = prices.filter((el) => el.tresholds === quantity);
+        const quantityFilter = prices.filter((el) => el.threshold === quantity);
         const list = auth.user !== null ? auth.user.discount_products_list : null;
         const discount = auth.user !== null ? auth.user.discount : null;
 
