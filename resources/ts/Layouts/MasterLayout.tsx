@@ -87,7 +87,7 @@ const MasterLayout = ({ children }: MasterLayoutProps) => {
                     className="h-22 fill-indigo-950 dark:fill-[#FF2D20]"
                 />
             </div>
-            <div className="flex justify-center">{children}</div>
+            <div className="flex justify-center m-auto">{children}</div>
 
             <div className="fixed w-screen text-xs h-8 bg-black text-white bottom-0 right-0 flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
                 <div className="text-center text-sm sm:text-start">&nbsp;</div>
