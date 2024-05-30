@@ -40,3 +40,9 @@ class CalcBcController extends Controller
  }
 
 }
+
+// $request->validate([
+//  // ...
+
+//  'role_id' => ['required', Rule::in(Role::ROLE_OPERATOR, Role::ROLE_USER)],
+// ]);
