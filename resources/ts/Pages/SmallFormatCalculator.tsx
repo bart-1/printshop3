@@ -3,7 +3,12 @@ import ContentBoxSection from "../Components/ContentBoxSection";
 import RadioInputsSection from "../Components/RadioInputsSection";
 import { Head, Link, usePage } from "@inertiajs/react";
 import MasterLayout, { InertiaProps } from "../Layouts/MasterLayout";
-import { discontTester, findElemntInJSONString } from "../helpers";
+import {
+    discontTester,
+    findElemntInJSONString,
+    findValueByThersholds,
+} from "../helpers";
+import CheckboxInputsSection from "../Components/CheckboxInputSection";
 
 interface SmallFormatCalculatorProps {
     className: string;
@@ -31,6 +36,7 @@ type MinPrices = {
     plotter_cut_min: number;
     laser_cut_min: number;
     cut_min: number;
+    large_format_color_print_min: number;
 };
 type LaminationPrices = {
     threshold_from: number;
@@ -52,18 +58,18 @@ type LaminationPrices = {
 interface ColorCalc extends InertiaProps {
     substratePrices: SubstratePrices[];
     colorPrintPrices: ColorPrintPrices[];
-    foldStaple: FoldStaplePrices[];
+    foldStaplePrices: FoldStaplePrices[];
     minPrices: MinPrices[];
     laminationPrices: LaminationPrices[];
 }
 
-type Lamination = "none" | "mat" | "gloss" | "soft";
+type Lamination = "none" | "a4_roll_mat" | "a4_roll_gloss" | "a4_roll_soft";
 
 const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
     const {
         substratePrices,
         colorPrintPrices,
-        foldStaple,
+        foldStaplePrices,
         minPrices,
         laminationPrices,
     } = usePage<ColorCalc>().props;
@@ -78,9 +84,10 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
     const [a4PrintPrice, setA4PrintPrice] = useState(0);
     const [result, setResult] = useState(0);
     const [laminType, setLaminType] = useState<Lamination>("none");
-    const [laminSingleRow, setLaminSingleRow] =
-        useState<LaminationPrices | null>(null);
     const [laminPrice, setLaminPrice] = useState(0);
+    const [cut, setCut] = useState(true);
+    const [fold, setFold] = useState(false);
+    const [foldPrice, setFoldPrice] = useState(0);
 
     //inignition
     useEffect(() => {
@@ -90,6 +97,8 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
         setSheetsA4Quantity(2);
         setPagesA4Quantity(2);
         setLaminType("none");
+        setFold(false);
+        setCut(true);
     }, []);
 
     useEffect(() => {
@@ -99,61 +108,64 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
     }, [printSidesMultiplier, formatMultiplier, quantity]);
 
     useEffect(() => {
-        const printPrice = colorPrintPrices?.filter((el) => {
-            if (
-                el.threshold_from <= pagesA4Quantity &&
-                el.threshold_to >= pagesA4Quantity
+        setA4PrintPrice(
+            findValueByThersholds<ColorPrintPrices>(
+                colorPrintPrices,
+                "threshold_from",
+                "threshold_to",
+                pagesA4Quantity,
+                "price"
             )
-                return el;
-        });
-
-        setA4PrintPrice(printPrice[0].price);
-        const laminationPrice = laminationPrices?.filter((el) => {
-            if (
-                el.threshold_from <= sheetsA4Quantity &&
-                el.threshold_to >= sheetsA4Quantity
-            )
-                return el;
-        });
-        setLaminSingleRow(laminationPrice[0]);
-    }, [pagesA4Quantity, sheetsA4Quantity]);
-
-    //set lamination price
-    useEffect(() => {
-        if (laminSingleRow !== null) {
-            switch (laminType) {
-                case "gloss":
-                    setLaminPrice(laminSingleRow["a4_roll_gloss"]);
-                    break;
-                case "mat":
-                    setLaminPrice(laminSingleRow["a4_roll_mat"]);
-                    break;
-                case "soft":
-                    setLaminPrice(laminSingleRow["a4_roll_soft"]);
-                    break;
-                case "none":
-                    setLaminPrice(0);
-                    break;
-            }
-        }
-    }, [laminSingleRow, laminType]);
+        );
+        setLaminPrice(
+            laminType != "none"
+                ? findValueByThersholds<LaminationPrices>(
+                      laminationPrices,
+                      "threshold_from",
+                      "threshold_to",
+                      sheetsA4Quantity,
+                      laminType
+                  )
+                : 0
+        );
+        setFoldPrice(
+            fold
+                ? findValueByThersholds<FoldStaplePrices>(
+                      foldStaplePrices,
+                      "threshold_from",
+                      "threshold_to",
+                      sheetsA4Quantity,
+                      "fold"
+                  )
+                : 0
+        );
+    }, [pagesA4Quantity, sheetsA4Quantity, fold, laminType]);
 
     useEffect(() => {
         const substrate = sheetsA4Quantity * substratePrice;
         const print = pagesA4Quantity * a4PrintPrice;
-        const cut = minPrices[0].cut_min;
+        const cutP = cut ? minPrices[0].cut_min : 0;
+
         const laminationP =
             sheetsA4Quantity * laminPrice >= minPrices[0].roll_lamin_min ||
             sheetsA4Quantity * laminPrice === 0
                 ? sheetsA4Quantity * laminPrice
                 : minPrices[0].roll_lamin_min;
-        setResult(substrate + print + cut + laminationP);
+        const foldP =
+            sheetsA4Quantity * foldPrice + cutP >= minPrices[0].cut_min ||
+            sheetsA4Quantity * foldPrice === 0
+                ? sheetsA4Quantity * foldPrice
+                : minPrices[0].cut_min;
+
+        setResult(substrate + print + cutP + foldP + laminationP);
     }, [
         a4PrintPrice,
         substratePrice,
         laminPrice,
         sheetsA4Quantity,
         pagesA4Quantity,
+        cut,
+        foldPrice,
     ]);
 
     const subtratesList = substratePrices?.map((el, index) => (
@@ -161,7 +173,6 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
             {el.name}
         </option>
     ));
-
     return (
         <div className={className}>
             <Head title="Small Format Calc" />
@@ -245,13 +256,33 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                                     minPrices[0].roll_lamin_min ||
                                 sheetsA4Quantity * laminPrice === 0 ? (
                                     <>
-                                        <div>A4:</div>{" "}
-                                        <div>{laminPrice}</div>
+                                        <div>A4:</div> <div>{laminPrice}</div>
                                     </>
                                 ) : (
                                     <>
                                         <div>min:</div>{" "}
                                         <div>{minPrices[0].roll_lamin_min}</div>
+                                    </>
+                                )}
+                            </div>
+                        </fieldset>
+                        <fieldset className=" border-2 border-indigo-950 dark:border-white p-3 items-center flex justify-center">
+                            <legend className="px-2">fold </legend>
+                            {/* {laminPrice} */}
+                            <div className="">
+                                {sheetsA4Quantity * foldPrice >=
+                                    minPrices[0].cut_min ||
+                                sheetsA4Quantity * foldPrice === 0 ? (
+                                    <>
+                                        <div>A4:</div>{" "}
+                                        <div>{fold ? foldPrice : 0}</div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div>min:</div>{" "}
+                                        <div>
+                                            {fold ? minPrices[0].cut_min : 0}
+                                        </div>
                                     </>
                                 )}
                             </div>
@@ -270,31 +301,31 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                                 value: "16",
                                 id: "a7",
                                 className: "",
-                                fieldName: "A7",
+                                fieldName: `${fold ? "A7->A8" : "A7"}`,
                             },
                             {
                                 value: "8",
                                 id: "a6",
                                 className: "",
-                                fieldName: "A6",
+                                fieldName: `${fold ? "A6->A7" : "A6"}`,
                             },
                             {
                                 value: "4",
                                 id: "a5",
                                 className: "",
-                                fieldName: "A5",
+                                fieldName: `${fold ? "A5->A6" : "A5"}`,
                             },
                             {
                                 value: "2",
                                 id: "a4",
                                 className: "",
-                                fieldName: "A4",
+                                fieldName: `${fold ? "A4->A5" : "A4"}`,
                             },
                             {
                                 value: "1",
                                 id: "a3",
                                 className: "",
-                                fieldName: "A3",
+                                fieldName: `${fold ? "A3->A3" : "A3"}`,
                             },
                         ]}
                     />
@@ -333,26 +364,48 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                                 fieldName: "none",
                             },
                             {
-                                value: "mat",
+                                value: "a4_roll_mat",
                                 id: "mat",
                                 className: "",
                                 fieldName: "mat",
                             },
                             {
-                                value: "gloss",
+                                value: "a4_roll_gloss",
                                 id: "gloss",
                                 className: "",
                                 fieldName: "gloss",
                             },
 
                             {
-                                value: "soft",
+                                value: "a4_roll_soft",
                                 id: "soft",
                                 className: "",
                                 fieldName: "soft touch",
                             },
                         ]}
                     />
+                    <fieldset className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex">
+                        <legend className="px-2">finishing</legend>{" "}
+                        <label htmlFor="input-fold">cut</label>
+                        <input
+                            id="input-cut"
+                            type="checkbox"
+                            defaultChecked
+                            onChange={() => setCut((prevState) => !prevState)}
+                        />
+                        <label htmlFor="input-fold">fold</label>
+                        <input
+                            id="input-fold"
+                            type="checkbox"
+                            onChange={() => setFold((prevState) => !prevState)}
+                        />
+                        {/* <label htmlFor="input-fold">corner staple</label>
+                        <input
+                            id="input-fold"
+                            type="checkbox"
+                            onChange={() => setFold((prevState) => !prevState)}
+                        /> */}
+                    </fieldset>
 
                     <ContentBoxSection className="mt-4">
                         <div className="text-4xl">

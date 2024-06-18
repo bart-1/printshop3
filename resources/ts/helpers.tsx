@@ -58,3 +58,18 @@ export const calcImposer = (sheetH:number, sheetW:number, productNettoH:number, 
         return wImposeInverted * hImposeInverted;
 
 }
+
+
+export const findValueByThersholds= <T,> (array:T[], thersholdFromKeyName: keyof T  , thersholdToKeyName: keyof T, valueToCompare: number, returnValueKeyName: keyof T): number => {
+
+const findedValue = array.filter((el) => {
+    if (
+        Number(el[thersholdFromKeyName]) <= valueToCompare &&
+        Number(el[thersholdToKeyName]) >= valueToCompare
+    )
+        return el;
+});
+
+return Number(findedValue[0][returnValueKeyName]) ?? 0;
+
+}
