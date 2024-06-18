@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
   $this->call(RegisteredUserSeeder::class);
   $this->call(BcPricesSeeder::class);
   $this->call(A4PrintAndPapersPricesSeeder::class);
-  $this->call(FoldStapleLaminMinPricesSeeder::class);
+  $this->call(FoldStapleLaminBinderyMinPricesSeeder::class);
+  $this->call(LargeFormatPricesSeeder::class);
+  $this->call(DimesionsAndMultipliersSeeder::class);
 
  }
 }

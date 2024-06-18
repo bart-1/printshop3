@@ -136,6 +136,8 @@ return new class extends Migration
    $table->timestamps();
    $table->integer('cut_1h');
    $table->integer('cut_boards_1h');
+   $table->integer('cut_stickers_from_roll_10pcs');
+   $table->integer('cut_stickers_set');
 
   });
   Schema::create('min_prices', function (Blueprint $table) {
@@ -143,10 +145,14 @@ return new class extends Migration
    $table->timestamps();
    $table->integer('small_cut_min');
    $table->integer('cut_min');
+   $table->integer('cut_boards_min');
+   $table->integer('cut_stickers_from_roll_min');
+   $table->integer('cut_stickers_min');
    $table->integer('cut_over_a7_min');
    $table->integer('roll_lamin_min');
    $table->integer('plotter_cut_min');
    $table->integer('laser_cut_min');
+   $table->integer('large_format_color_print_min');
 
   });
   Schema::create('lamination_prices', function (Blueprint $table) {

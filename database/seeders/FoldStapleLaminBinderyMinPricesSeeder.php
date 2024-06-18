@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class FoldStapleLaminMinPricesSeeder extends Seeder
+class FoldStapleLaminBinderyMinPricesSeeder extends Seeder
 {
  /**
   * Run the database seeds.
@@ -122,14 +122,27 @@ class FoldStapleLaminMinPricesSeeder extends Seeder
    'bc_200mic'      => 2,
   ]);
   DB::table('min_prices')->insert([
-   'created_at'      => now(),
-   'updated_at'      => now(),
-   'small_cut_min'   => 5,
-   'cut_min'         => 15,
-   'cut_over_a7_min' => 30,
-   'roll_lamin_min'  => 36.9,
-   'plotter_cut_min' => 39,
-   'laser_cut_min'   => 60,
+   'created_at'                   => now(),
+   'updated_at'                   => now(),
+   'small_cut_min'                => 5,
+   'cut_min'                      => 15,
+   'cut_boards_min'               => 30,
+   'cut_stickers_from_roll_min'   => 15,
+   'cut_stickers_min'             => 30,
+   'cut_over_a7_min'              => 30,
+   'roll_lamin_min'               => 36.9,
+   'plotter_cut_min'              => 39,
+   'laser_cut_min'                => 60,
+   'large_format_color_print_min' => 50,
+
+  ]);
+  DB::table('bindery_cut_prices')->insert([
+   'created_at'                   => now(),
+   'updated_at'                   => now(),
+   'cut_1h'                       => 50,
+   'cut_boards_1h'                => 100,
+   'cut_stickers_from_roll_10pcs' => 15,
+   'cut_stickers_set'             => 30,
 
   ]);
 
