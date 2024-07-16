@@ -19,8 +19,12 @@ export const discontTester = (
     list: string | null,
     discount: number | null
 ): number => {
-
-    if (list && discount && discount > 0 && findElemntInJSONString(element, list)) {
+    if (
+        list &&
+        discount &&
+        discount > 0 &&
+        findElemntInJSONString(element, list)
+    ) {
         const discountValueTransformer = (100 - discount) / 100;
         return discountValueTransformer;
     } else return 1;
@@ -37,39 +41,59 @@ export const discontTester = (
  * @returns
  */
 
-
-
-export const calcImposer = (sheetH:number, sheetW:number, productNettoH:number, productNettoW:number, safeSheetMargin=10, bleed=4):number => {
+export const calcImposer = (
+    sheetH: number,
+    sheetW: number,
+    productNettoH: number,
+    productNettoW: number,
+    safeSheetMargin = 10,
+    bleed = 4
+): number => {
     switch (true) {
         case sheetH - safeSheetMargin <= 0 || sheetW - safeSheetMargin <= 0:
             return 0;
-        case productNettoH * productNettoW > (sheetH - safeSheetMargin) * (sheetW - safeSheetMargin):
+        case productNettoH * productNettoW >
+            (sheetH - safeSheetMargin) * (sheetW - safeSheetMargin):
             return 0;
     }
 
-    const wImpose = Math.floor(sheetW / (productNettoW+bleed));
-    const hImpose = Math.floor(sheetH / (productNettoH+bleed));
-    const wImposeInverted = Math.floor(sheetH / (productNettoW+bleed));
-    const hImposeInverted = Math.floor(sheetW /( productNettoH+bleed));
+    const wImpose = Math.floor(sheetW / (productNettoW + bleed));
+    const hImpose = Math.floor(sheetH / (productNettoH + bleed));
+    const wImposeInverted = Math.floor(sheetH / (productNettoW + bleed));
+    const hImposeInverted = Math.floor(sheetW / (productNettoH + bleed));
 
     if (wImpose * hImpose > wImposeInverted * hImposeInverted)
         return wImpose * hImpose;
-    else
-        return wImposeInverted * hImposeInverted;
+    else return wImposeInverted * hImposeInverted;
+};
 
-}
+export const findValueByThersholds = <T,>(
+    array: T[],
+    thersholdFromKeyName: keyof T,
+    thersholdToKeyName: keyof T,
+    valueToCompare: number,
+    returnValueKeyName: keyof T
+): number => {
+    const findedValue = array.filter((el) => {
+        if (
+            Number(el[thersholdFromKeyName]) <= valueToCompare &&
+            Number(el[thersholdToKeyName]) >= valueToCompare
+        )
+            return el;
+    });
+    
+if(!findedValue[0] || !findedValue[0][returnValueKeyName]) return 0;
 
+    return Number(findedValue[0][returnValueKeyName]);
+};
 
-export const findValueByThersholds= <T,> (array:T[], thersholdFromKeyName: keyof T  , thersholdToKeyName: keyof T, valueToCompare: number, returnValueKeyName: keyof T): number => {
-
-const findedValue = array.filter((el) => {
+export const isNameISOFormat = (name: string):boolean => {
     if (
-        Number(el[thersholdFromKeyName]) <= valueToCompare &&
-        Number(el[thersholdToKeyName]) >= valueToCompare
+        /^A|a[0-9]/.test(name) ||
+        /^B|b[0-9]/.test(name) ||
+        /^C|c[0-9]/.test(name) ||
+        /^DL|dl/.test(name)
     )
-        return el;
-});
-
-return Number(findedValue[0][returnValueKeyName]) ?? 0;
-
-}
+        return true;
+    else return false;
+};
