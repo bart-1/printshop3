@@ -1,15 +1,15 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, ReactNode, useEffect, useState } from "react";
 
-type RadioInputProps = {
+export type RadioInputProps = {
     id: string;
-    value: string;
+    value: string | number;
     className?: string;
-    fieldName: string;
+    fieldName: string | ReactNode | ReactNode[];
 };
 
 interface RadioInputsSectionProps {
     defaultCheckedValue?: string;
-    radioInputsGroup: RadioInputProps[] | null;
+    radioInputsGroup: RadioInputProps[] | [];
     legend: string;
     className: string;
     output: (x: RadioInputProps["value"]) => void;
@@ -36,7 +36,7 @@ const RadioInputsSection = ({
         <div key={"input" + index} className="flex align-middle gap-2">
             <label htmlFor={el.id}>{el.fieldName}</label>
             <input
-                defaultChecked={defaultCheckedValue === el.value ? true : false}
+                defaultChecked={defaultCheckedValue === el.value || defaultCheckedValue === el.id ? true : false}
                 id={el.id}
                 name={legend}
                 onChange={handleChange}
@@ -48,7 +48,7 @@ const RadioInputsSection = ({
 
     return (
         <>
-            <fieldset className={className}>
+            <fieldset className={`${className}`}>
                 <legend className="px-2">{legend}</legend> {renderRadioInputs}
             </fieldset>
         </>
