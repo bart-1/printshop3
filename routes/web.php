@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CalcBcController;
+use App\Http\Controllers\CalcLatexSticersController;
 use App\Http\Controllers\CalcSmallFormatController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestController;
@@ -38,6 +39,11 @@ Route::post('/sfcolorprint', [AuthenticatedSessionController::class, 'destroy']
 )->name('sfcolorprint.logout');
 
 Route::get('/sfcolorprint', [CalcSmallFormatController::class, 'index'])->name('sfcolorprint');
+
+Route::post('/latexstickers', [AuthenticatedSessionController::class, 'destroy']
+)->name('latexstickers.logout');
+
+Route::get('/latexstickers', [CalcLatexSticersController::class, 'index'])->name('latexstickers');
 
 
 Route::get('/dashboard', function () {

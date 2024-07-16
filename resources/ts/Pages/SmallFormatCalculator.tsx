@@ -180,14 +180,14 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
             <Link
                 href={"welcome"}
                 as="button"
-                className=" dark:border-red-500 dark:hover:bg-red-700 dark:text-white bg-blue-400 border-2 border-indigo-950 dark:bg-red-800/20 hover:bg-blue-200 p-2 mb-3 rounded-md"
+                className="dark:border-red-500 dark:hover:bg-red-700 dark:text-white bg-blue-400 border-2 border-indigo-950 dark:bg-red-800/20 hover:bg-blue-200 p-2 mb-3 rounded-md"
             >
                 {"< back"}
             </Link>
             <div>
                 <ContentBoxSection>
                     <div className="flex gap-2">
-                        <fieldset className="w-[50%] border-2 border-indigo-950 dark:border-white p-3 gap-3 flex justify-center">
+                        <fieldset className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex justify-center">
                             <legend className="px-2">quantity </legend>
                             <input
                                 onChange={(
