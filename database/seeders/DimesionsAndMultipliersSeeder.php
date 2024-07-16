@@ -13,7 +13,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
  public function run(): void
  {
 
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => '50x90',
@@ -26,14 +26,14 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_sheet_width'         => 500,
    'large_format_sheet_height'        => 400,
    'large_format_sheet_area'          => 0.2,
-   'large_format_multiplier'          => 0,
+   'large_format_multiplier'          => 35,
    'large_format_cut_to_sheet_width'  => 500,
-   'large_format_cut_to_sheet_height' => 400,
-   'large_format_cut_to_sheet_area'   => 0.2,
-   'large_format_cut_to_multiplier'   => 0,
+   'large_format_cut_to_sheet_height' => 440,
+   'large_format_cut_to_sheet_area'   => 0.22,
+   'large_format_cut_to_multiplier'   => 32,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => '85x55',
@@ -46,14 +46,14 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_sheet_width'         => 500,
    'large_format_sheet_height'        => 400,
    'large_format_sheet_area'          => 0.2,
-   'large_format_multiplier'          => 0,
+   'large_format_multiplier'          => 30,
    'large_format_cut_to_sheet_width'  => 500,
    'large_format_cut_to_sheet_height' => 400,
    'large_format_cut_to_sheet_area'   => 0.2,
-   'large_format_cut_to_multiplier'   => 0,
+   'large_format_cut_to_multiplier'   => 30,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => '50x50',
@@ -73,7 +73,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_cut_to_multiplier'   => 40,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => '70x70',
@@ -81,19 +81,19 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'height'                           => 70,
    'small_format_sheet_width'         => 320,
    'small_format_sheet_height'        => 450,
-   'small_format_multiplier'          => 0,
+   'small_format_multiplier'          => 1,
    'small_format_sheet_set'           => 1,
    'large_format_sheet_width'         => 500,
-   'large_format_sheet_height'        => 400,
-   'large_format_sheet_area'          => 0.2,
-   'large_format_multiplier'          => 0,
+   'large_format_sheet_height'        => 380,
+   'large_format_sheet_area'          => 0.19,
+   'large_format_multiplier'          => 30,
    'large_format_cut_to_sheet_width'  => 500,
-   'large_format_cut_to_sheet_height' => 400,
-   'large_format_cut_to_sheet_area'   => 0.2,
-   'large_format_cut_to_multiplier'   => 0,
+   'large_format_cut_to_sheet_height' => 360,
+   'large_format_cut_to_sheet_area'   => 0.18,
+   'large_format_cut_to_multiplier'   => 24,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => '80x80',
@@ -101,7 +101,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'height'                           => 80,
    'small_format_sheet_width'         => 320,
    'small_format_sheet_height'        => 450,
-   'small_format_multiplier'          => 0,
+   'small_format_multiplier'          => 1,
    'small_format_sheet_set'           => 1,
    'large_format_sheet_width'         => 500,
    'large_format_sheet_height'        => 360,
@@ -113,7 +113,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_cut_to_multiplier'   => 20,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => '100x100',
@@ -133,7 +133,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_cut_to_multiplier'   => 12,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => '150x150',
@@ -153,7 +153,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_cut_to_multiplier'   => 6,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => 'A7',
@@ -164,16 +164,16 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'small_format_multiplier'          => 12,
    'small_format_sheet_set'           => 1,
    'large_format_sheet_width'         => 500,
-   'large_format_sheet_height'        => 400,
-   'large_format_sheet_area'          => 0.2,
-   'large_format_multiplier'          => 0,
+   'large_format_sheet_height'        => 350,
+   'large_format_sheet_area'          => 0.175,
+   'large_format_multiplier'          => 18,
    'large_format_cut_to_sheet_width'  => 500,
-   'large_format_cut_to_sheet_height' => 400,
-   'large_format_cut_to_sheet_area'   => 0.2,
-   'large_format_cut_to_multiplier'   => 0,
+   'large_format_cut_to_sheet_height' => 360,
+   'large_format_cut_to_sheet_area'   => 0.18,
+   'large_format_cut_to_multiplier'   => 16,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => 'A6',
@@ -193,7 +193,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_cut_to_multiplier'   => 9,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => 'A5',
@@ -213,7 +213,7 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'large_format_cut_to_multiplier'   => 6,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => 'A4',
@@ -224,16 +224,16 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'small_format_multiplier'          => 2,
    'small_format_sheet_set'           => 1,
    'large_format_sheet_width'         => 500,
-   'large_format_sheet_height'        => 400,
-   'large_format_sheet_area'          => 0.2,
-   'large_format_multiplier'          => 0,
+   'large_format_sheet_height'        => 320,
+   'large_format_sheet_area'          => 0.16,
+   'large_format_multiplier'          => 2,
    'large_format_cut_to_sheet_width'  => 500,
-   'large_format_cut_to_sheet_height' => 400,
-   'large_format_cut_to_sheet_area'   => 0.2,
-   'large_format_cut_to_multiplier'   => 0,
+   'large_format_cut_to_sheet_height' => 360,
+   'large_format_cut_to_sheet_area'   => 0.16,
+   'large_format_cut_to_multiplier'   => 2,
    'large_format_sheet_set'           => 2,
   ]);
-  DB::table('dimesions_with_multipliers')->insert([
+  DB::table('dimensions_with_multipliers')->insert([
    'created_at'                       => now(),
    'updated_at'                       => now(),
    'name'                             => 'A3',
@@ -244,13 +244,13 @@ class DimesionsAndMultipliersSeeder extends Seeder
    'small_format_multiplier'          => 1,
    'small_format_sheet_set'           => 1,
    'large_format_sheet_width'         => 500,
-   'large_format_sheet_height'        => 400,
-   'large_format_sheet_area'          => 0.2,
-   'large_format_multiplier'          => 0,
+   'large_format_sheet_height'        => 320,
+   'large_format_sheet_area'          => 0.16,
+   'large_format_multiplier'          => 1,
    'large_format_cut_to_sheet_width'  => 500,
-   'large_format_cut_to_sheet_height' => 400,
-   'large_format_cut_to_sheet_area'   => 0.2,
-   'large_format_cut_to_multiplier'   => 0,
+   'large_format_cut_to_sheet_height' => 320,
+   'large_format_cut_to_sheet_area'   => 0.16,
+   'large_format_cut_to_multiplier'   => 1,
    'large_format_sheet_set'           => 2,
   ]);
 

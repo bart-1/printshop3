@@ -140,7 +140,7 @@ class FoldStapleLaminBinderyMinPricesSeeder extends Seeder
    'created_at'                   => now(),
    'updated_at'                   => now(),
    'cut_1h'                       => 50,
-   'cut_boards_1h'                => 100,
+   'cut_boards_5pcs'                => 100,
    'cut_stickers_from_roll_10pcs' => 15,
    'cut_stickers_set'             => 30,
 

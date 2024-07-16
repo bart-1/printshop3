@@ -135,7 +135,7 @@ return new class extends Migration
    $table->id();
    $table->timestamps();
    $table->integer('cut_1h');
-   $table->integer('cut_boards_1h');
+   $table->integer('cut_boards_5pcs');
    $table->integer('cut_stickers_from_roll_10pcs');
    $table->integer('cut_stickers_set');
 
@@ -181,8 +181,8 @@ return new class extends Migration
    $table->integer('threshold_from');
    $table->integer('threshold_to');
    $table->integer('paper');
-   $table->integer('foil');
-   $table->integer('foil_ed');
+   $table->integer('sticker_foil');
+   $table->integer('sticker_foil_easy_dot');
    $table->integer('blockout');
    $table->integer('canvas');
 

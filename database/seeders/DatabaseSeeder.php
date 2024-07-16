@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
   $this->call(FoldStapleLaminBinderyMinPricesSeeder::class);
   $this->call(LargeFormatPricesSeeder::class);
   $this->call(DimesionsAndMultipliersSeeder::class);
+  $this->call(PlotterCutPricesSeeder::class);
 
  }
 }
