@@ -1,23 +1,23 @@
 import PrimaryButton from "../../Components/PrimaryButton";
-import GuestLayout from "../../Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
+import MasterLayout from "../../Layouts/MasterLayout";
 
 interface VerifyEmailProps {
     status: string;
 }
 
-export default function VerifyEmail({ status }:VerifyEmailProps) {
+export default function VerifyEmail({ status }: VerifyEmailProps) {
     const { post, processing } = useForm({});
 
-    const submit = (e:FormEvent) => {
+    const submit = (e: FormEvent) => {
         e.preventDefault();
 
         post(route("verification.send"));
     };
 
     return (
-        <GuestLayout>
+        <MasterLayout>
             <Head title="Email Verification" />
 
             <div className="mb-4 text-sm text-gray-600">
@@ -50,6 +50,6 @@ export default function VerifyEmail({ status }:VerifyEmailProps) {
                     </Link>
                 </div>
             </form>
-        </GuestLayout>
+        </MasterLayout>
     );
 }

@@ -1,10 +1,10 @@
 import { ChangeEvent, SyntheticEvent, useEffect } from "react";
 import { Head, Link, useForm } from "@inertiajs/react";
-import GuestLayout from "../../Layouts/GuestLayout";
 import InputLabel from "../../Components/InputLabel";
 import InputError from "../../Components/InputError";
 import PrimaryButton from "../../Components/PrimaryButton";
 import TextInput from "../../Components/TextInput";
+import MasterLayout from "../../Layouts/MasterLayout";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -27,7 +27,7 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
+        <MasterLayout>
             <Head title="Register" />
 
             <form onSubmit={submit}>
@@ -130,6 +130,6 @@ export default function Register() {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestLayout>
+        </MasterLayout>
     );
 }

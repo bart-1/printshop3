@@ -2,9 +2,9 @@ import { ChangeEvent, FormEvent, useEffect } from "react";
 import { Head, useForm } from "@inertiajs/react";
 import InputLabel from "../../Components/InputLabel";
 import TextInput from "../../Components/TextInput";
-import Guest from "../../Layouts/GuestLayout";
 import InputError from "../../Components/InputError";
 import PrimaryButton from "../../Components/PrimaryButton";
+import MasterLayout from "../../Layouts/MasterLayout";
 
 interface ResetPasswordProps {
     token: string;
@@ -32,7 +32,7 @@ export default function ResetPassword({ token, email }:ResetPasswordProps) {
     };
 
     return (
-        <Guest>
+        <MasterLayout>
             <Head title="Reset Password" />
 
             <form onSubmit={submit}>
@@ -105,6 +105,6 @@ export default function ResetPassword({ token, email }:ResetPasswordProps) {
                     </PrimaryButton>
                 </div>
             </form>
-        </Guest>
+        </MasterLayout>
     );
 }

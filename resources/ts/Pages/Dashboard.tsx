@@ -1,5 +1,5 @@
-import AuthenticatedLayout from "../Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import MasterLayout from "../Layouts/MasterLayout";
 
 const header = (
     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
@@ -12,7 +12,7 @@ interface DashboardProps {
 }
 export default function Dashboard({ auth }: DashboardProps) {
     return (
-        <AuthenticatedLayout user={auth.user} header={header}>
+        <MasterLayout>
             <Head title="Dashboard" />
 
             {/* <div className="py-12">
@@ -24,6 +24,6 @@ export default function Dashboard({ auth }: DashboardProps) {
                     </div>
                 </div>
             </div> */}
-        </AuthenticatedLayout>
+        </MasterLayout>
     );
 }
