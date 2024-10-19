@@ -15,16 +15,6 @@ interface ThemeProps {
     children: ReactNode | ReactNode[];
 }
 
-const Theme = ({ children }: ThemeProps) => {
-
-        return (
-            <>
-                <ThemeToggleSwitch />
-                {children}
-            </>
-        )
-};
-export default Theme;
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -36,9 +26,9 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
 
-        root.render(<Theme>
+        root.render(
             <App {...props} />
-        </Theme>);
+        );
     },
     progress: {
         color: "#4B5563",

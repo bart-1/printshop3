@@ -9,6 +9,7 @@ import {
     findValueByThersholds,
 } from "../helpers";
 import CheckboxInputsSection from "../Components/CheckboxInputSection";
+import PageTitle from "../Components/PageTitle";
 
 interface SmallFormatCalculatorProps {
     className: string;
@@ -176,18 +177,12 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
     return (
         <div className={className}>
             <Head title="Small Format Calc" />
+            <PageTitle heavyTxt="SmallFormat" lightTxt="Calc" />
 
-            <Link
-                href={"welcome"}
-                as="button"
-                className="dark:border-red-500 dark:hover:bg-red-700 dark:text-white bg-blue-400 border-2 border-indigo-950 dark:bg-red-800/20 hover:bg-blue-200 p-2 mb-3 rounded-md"
-            >
-                {"< back"}
-            </Link>
-            <div>
+            <div className="scale-90">
                 <ContentBoxSection>
                     <div className="flex gap-2">
-                        <fieldset className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex justify-center">
+                        <fieldset className="border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex justify-center">
                             <legend className="px-2">quantity </legend>
                             <input
                                 onChange={(
@@ -218,7 +213,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                                 type="number"
                             />
                         </fieldset>
-                        <fieldset className="w-[50%] border-2 border-indigo-950 dark:border-white p-3 gap-3 flex justify-center">
+                        <fieldset className="w-[50%] border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex justify-center">
                             <legend className="px-2">substrates </legend>
                             <select
                                 onChange={(e) =>
@@ -231,7 +226,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                             </select>
                         </fieldset>
                     </div>
-                    <div className="flex flex-row gap-2 h-28">
+                    <div className="flex flex-row gap-2 h-28 hidden">
                         <fieldset className="border-2 placeholder:selection:border-2 border-indigo-950 dark:border-white p-3  flex justify-center items-center">
                             <legend className="px-2">sheets </legend>
                             {sheetsA4Quantity}
@@ -294,7 +289,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                         output={(e) => {
                             setFormatMultiplier(Number(e));
                         }}
-                        className="border-2 border-indigo-950 dark:border-white p-3 gap-5 flex "
+                        className="border-2 border-indigo-950 dark:border-gray-400 p-3 gap-5 flex "
                         defaultCheckedValue="2"
                         radioInputsGroup={[
                             {
@@ -334,7 +329,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                         output={(e) => {
                             setPrintSidesMultiplier(Number(e));
                         }}
-                        className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex"
+                        className="border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex"
                         defaultCheckedValue="1"
                         radioInputsGroup={[
                             {
@@ -354,7 +349,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                     <RadioInputsSection
                         legend="foil laminate 1+1"
                         output={(e) => setLaminType(e as Lamination)}
-                        className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex"
+                        className="border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex"
                         defaultCheckedValue="none"
                         radioInputsGroup={[
                             {
@@ -384,7 +379,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                             },
                         ]}
                     />
-                    <fieldset className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex">
+                    <fieldset className="border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex">
                         <legend className="px-2">finishing</legend>{" "}
                         <label htmlFor="input-fold">cut</label>
                         <input
@@ -407,7 +402,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                         /> */}
                     </fieldset>
 
-                    <ContentBoxSection className="mt-4">
+                    <ContentBoxSection className="mt-4 h-28">
                         <div className="text-4xl">
                             PLN Brutto: {parseFloat(String(result)).toFixed(2)}
                             ,-{" "}

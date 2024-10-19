@@ -8,8 +8,12 @@ const localStorageTheme = localStorage.getItem("theme");
 const isDark = localStorageTheme === "dark" ? true : false;
 
 
+interface ThemeToggleSwitchProps {
+    className?: string
+}
 
-const ThemeToggleSwitch = () => {
+
+const ThemeToggleSwitch = ({ className }:ThemeToggleSwitchProps) => {
     const [colorTheme, setColorTheme] = useState(isDark);
 
     useEffect(() => {
@@ -24,7 +28,7 @@ const ThemeToggleSwitch = () => {
     }, [colorTheme]);
 
     return (
-        <div className="fixed top-3">
+        <div className={className}>
             <button
                 className="p-3 z-12"
                 onClick={() => setColorTheme((prevState) => !prevState)}
@@ -33,7 +37,7 @@ const ThemeToggleSwitch = () => {
                     value={{
                         size: "25px",
                         className:
-                            "fill-indigo-950 dark:fill-white dark:text-white text-indigo-950",
+                            "fill-indigo-950 dark:fill-gray-400 dark:text-gray-400 text-indigo-950",
                     }}
                 >
                     {!colorTheme ? (

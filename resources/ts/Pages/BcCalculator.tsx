@@ -4,6 +4,7 @@ import RadioInputsSection from "../Components/RadioInputsSection";
 import { Head, Link, usePage } from "@inertiajs/react";
 import MasterLayout, { InertiaProps } from "../Layouts/MasterLayout";
 import { discontTester, findElemntInJSONString } from "../helpers";
+import PageTitle from "../Components/PageTitle";
 
 interface BcCalculatorProps {
     className: string;
@@ -48,28 +49,18 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
         setLaminate("bc_lamin_none");
     }, []);
 
-
-
     useEffect(() => {
         const quantityFilter = prices.filter((el) => el.threshold === quantity);
-        const list = auth.user !== null ? auth.user.discount_products_list : null;
+        const list =
+            auth.user !== null ? auth.user.discount_products_list : null;
         const discount = auth.user !== null ? auth.user.discount : null;
-
 
         if (printSides && laminate) {
             setResult(
                 quantityFilter[0][printSides] *
-                    discontTester(
-                        printSides,
-                        list,
-                        discount
-                    ) +
+                    discontTester(printSides, list, discount) +
                     quantityFilter[0][laminate] *
-                        discontTester(
-                            laminate,
-                            list,
-                           discount
-                        )
+                        discontTester(laminate, list, discount)
             );
         }
     }, [quantity, printSides, laminate]);
@@ -77,17 +68,11 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
     return (
         <div className={className}>
             <Head title="BC Calc" />
+            <PageTitle heavyTxt="BCards" lightTxt="Calc" />
 
-            <Link
-                href={"welcome"}
-                as="button"
-                className=" dark:border-red-500 dark:hover:bg-red-700 dark:text-white bg-blue-400 border-2 border-indigo-950 dark:bg-red-800/20 hover:bg-blue-200 p-2 mb-3 rounded-md"
-            >
-                {"< back"}
-            </Link>
-            <div>
+            <div className="scale-90">
                 <ContentBoxSection>
-                    <fieldset className="w-[200px] border-2 border-indigo-950 dark:border-white p-3 gap-3 flex">
+                    <fieldset className="w-[200px] border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex">
                         <legend className="px-2">quantity </legend>
 
                         <input
@@ -112,7 +97,7 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
                     <RadioInputsSection
                         legend="print"
                         output={(e) => setPrintSides(e as keyof PricesBC)}
-                        className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex"
+                        className="border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex"
                         defaultCheckedValue="bc_40_print"
                         radioInputsGroup={[
                             {
@@ -132,7 +117,7 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
                     <RadioInputsSection
                         legend="foil laminate 1+1"
                         output={(e) => setLaminate(e as keyof PricesBC)}
-                        className="border-2 border-indigo-950 dark:border-white p-3 gap-3 flex"
+                        className="border-2 border-indigo-950 dark:border-gray-400 p-3 gap-3 flex"
                         defaultCheckedValue="bc_lamin_none"
                         radioInputsGroup={[
                             {
@@ -169,7 +154,10 @@ const BcCalculator = ({ className }: BcCalculatorProps) => {
                     />
 
                     <ContentBoxSection className="mt-4">
-                        <div className="text-4xl">PLN Brutto: {parseFloat(String(result)).toFixed(2)},- </div>
+                        <div className="text-4xl">
+                            PLN Brutto: {parseFloat(String(result)).toFixed(2)}
+                            ,-{" "}
+                        </div>
                         <div className="text-xl">
                             PLN Netto:{" "}
                             {parseFloat(String(result / 1.23)).toFixed(2)},-{" "}

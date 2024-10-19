@@ -6,6 +6,7 @@ import RadioInputsSection, {
 import { Head, Link, usePage } from "@inertiajs/react";
 import MasterLayout, { InertiaProps } from "../Layouts/MasterLayout";
 import { findValueByThersholds, isNameISOFormat } from "../helpers";
+import PageTitle from "../Components/PageTitle";
 
 interface SmallFormatCalculatorProps {
     className: string;
@@ -220,15 +221,8 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
     return (
         <div className={className}>
             <Head title="Stickers Calc" />
-
-            <Link
-                href={"welcome"}
-                as="button"
-                className=" dark:border-red-500 dark:hover:bg-red-700 dark:text-white bg-blue-400 border-2 border-indigo-950 dark:bg-red-800/20 hover:bg-blue-200 p-2 mb-3 rounded-md"
-            >
-                {"< back"}
-            </Link>
-            <div className=" max-w-xl">
+            <PageTitle heavyTxt="Stickers" lightTxt="Calc" />
+            <div className=" max-w-xl scale-90">
                 <ContentBoxSection>
                     <div className="flex gap-2">
                         <fieldset className="w-[50%] border-2 border-indigo-950 dark:border-white p-3 gap-3 flex justify-center">
@@ -276,7 +270,6 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                             </select>
                         </fieldset>
                     </div>
-                    
 
                     <RadioInputsSection
                         legend="sticker size (mm / ISO)"

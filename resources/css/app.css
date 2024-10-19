@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
- @layer base {
-    body {
-       padding: 0;
-       margin: 0;
-       box-sizing: border-box;
-       @apply h-screen w-screen light-bg dark:dark-bg;
+@layer base {
+    body{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        @apply light-bg dark:dark-bg;
     }
 }
 @layer components {

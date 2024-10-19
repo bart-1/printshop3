@@ -20,7 +20,7 @@ const ContentBoxSection = ({
     return (
         <>
             <div
-                className={` p-6 min-h-64 bg-slate-300 dark:bg-mygray-darker/50 dark:bg-gradient-to-bl from-mygray-lighter/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-black/60 flex  transition-all duration-250 focus:outline focus:outline-2 border-[1px] border-mygray-normal hover:border-cyan-500 hover:dark:border-red-500 ${className}`}
+                className={` p-6 min-h-56 bg-slate-300 dark:bg-mygray-darker/50 dark:bg-gradient-to-bl from-mygray-lighter/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-black/60 flex  transition-all duration-250 focus:outline focus:outline-2 border-[1px] border-mygray-normal hover:border-cyan-500 hover:dark:border-red-500 ${className}`}
             >
                 <div>
                     {icon && (
@@ -35,10 +35,10 @@ const ContentBoxSection = ({
                             </IconContext.Provider>
                         </div>
                     )}
-                    <h2 className="mt-6 text-2xl text-left font-semibold text-indigo-950 dark:text-white">
+                    <h2 className="mt-5 text-2xl text-left font-semibold text-indigo-950 dark:text-white">
                         {title ? title : ""}
                     </h2>
-                    <div className="mt-4 text-left text-gray-700 dark:text-gray-400 text-md leading-relaxed">
+                    <div className="mt-2 text-left text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
                         {children}
                     </div>
                 </div>
