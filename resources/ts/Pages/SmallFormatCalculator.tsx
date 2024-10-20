@@ -226,7 +226,7 @@ const SmallFormatCalculator = ({ className }: SmallFormatCalculatorProps) => {
                             </select>
                         </fieldset>
                     </div>
-                    <div className="flex flex-row gap-2 h-28 hidden">
+                    <div className="flex-row gap-2 h-28 hidden">
                         <fieldset className="border-2 placeholder:selection:border-2 border-indigo-950 dark:border-white p-3  flex justify-center items-center">
                             <legend className="px-2">sheets </legend>
                             {sheetsA4Quantity}
