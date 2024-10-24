@@ -19,13 +19,12 @@ class Cors
  public function handle($request, Closure $next)
  {
   $headers = [
-   'Access-Control-Allow-Origin'      => 'https://www.dziwnykot.pl, https://www.dziwnykot.pl/calc-test',
+   'Access-Control-Allow-Origin'      => 'https://www.dziwnykot.pl, https://www.dziwnykot.pl/calc-test, https://dziwnykot.pl',
    'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
    'Access-Control-Allow-Credentials' => 'true',
    'Access-Control-Max-Age'           => '0',
    'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With, X-Inertia, X-Inertia-Version',
-   'Accept'                           => 'application/json',
-   'Accept'                           => 'text/javascript',
+   'Accept'                           => 'application/json, text/javascript',
   ];
 
   if ($request->isMethod('OPTIONS')) {
