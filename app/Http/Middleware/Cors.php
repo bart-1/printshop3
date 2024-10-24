@@ -21,6 +21,7 @@ class Cors
   $headers = [
    'Access-Control-Allow-Origin'  => 'https://dziwnykot.pl',
    'Access-Control-Allow-Methods' => '*',
+   'Access-Control-Expose-Headers' =>  'X-Inertia'
 
   ];
 
