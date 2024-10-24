@@ -15,13 +15,13 @@ return [
  |
   */
 
- 'paths'                    => ['api/*', 'sanctum/csrf-cookie', '/*', '*/*'],
+ 'paths'                    => ['api/*', 'sanctum/csrf-cookie'],
 
- 'allowed_methods'          => ['GET', 'POST', 'OPTIONS', 'DELETE'],
+ 'allowed_methods'          => ['GET', 'POST', 'OPTIONS'],
 
- 'allowed_origins'          => ['https://www.dziwnykot.pl', 'https://dziwnykot.pl'],
+ 'allowed_origins'          => ['https://dziwnykot.pl'],
 
- 'allowed_origins_patterns' => ['/^https?:\/\/dziwnykot\.pl\/[a-z0-9\/-]+$/'],
+ 'allowed_origins_patterns' => ['/^https?:\/\/(www\.)?dziwnykot\.pl\/[a-z0-9\/-]+$/'],
 
  'allowed_headers'          => ['*'],
 
@@ -29,6 +29,6 @@ return [
 
  'max_age'                  => 0,
 
- 'supports_credentials'     => false,
+ 'supports_credentials'     => true,
 
 ];
