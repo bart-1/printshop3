@@ -2,33 +2,35 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Cross-Origin Resource Sharing (CORS) Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
-    */
+ /*
+ |--------------------------------------------------------------------------
+ | Cross-Origin Resource Sharing (CORS) Configuration
+ |--------------------------------------------------------------------------
+ |
+ | Here you may configure your settings for cross-origin resource sharing
+ | or "CORS". This determines what cross-origin operations may execute
+ | in web browsers. You are free to adjust these settings as needed.
+ |
+ | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+ |
+  */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', '/*', '*/*'],
+ 'paths'                    => ['api/*', 'sanctum/csrf-cookie', '/*', '*/*'],
 
-    'allowed_methods' => ['GET', 'POST', 'OPTIONS', 'DELETE' ],
+ 'allowed_methods'          => ['GET', 'POST', 'OPTIONS', 'DELETE'],
 
-    'allowed_origins' => ['https://dziwnykot.pl, https://www.dziwnykot.pl'],
+ 'allowed_origins'          => ['https://www.dziwnykot.pl', 'https://www.dziwnykot.pl', 'https://www.dziwnykot.pl/calc-test
+', 'https://dziwnykot.pl/calc-test',
+ ],
 
-    'allowed_origins_patterns' => [],
+ 'allowed_origins_patterns' => ['/^https?:\/\/dziwnykot\.pl\/[a-z0-9\/-]+$/'],
 
-    'allowed_headers' => ['*'],
+ 'allowed_headers'          => ['*'],
 
-    'exposed_headers' => [],
+ 'exposed_headers'          => [],
 
-    'max_age' => 0,
+ 'max_age'                  => 0,
 
-    'supports_credentials' => false,
+ 'supports_credentials'     => false,
 
 ];
