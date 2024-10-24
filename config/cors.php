@@ -19,7 +19,7 @@ return [
 
  'allowed_methods'          => ['GET', 'POST', 'OPTIONS', 'DELETE'],
 
- 'allowed_origins'          => ['https://www.dziwnykot.pl', 'https://www.dziwnykot.pl'],
+ 'allowed_origins'          => ['https://www.dziwnykot.pl', 'https://dziwnykot.pl'],
 
  'allowed_origins_patterns' => ['/^https?:\/\/dziwnykot\.pl\/[a-z0-9\/-]+$/'],
 
