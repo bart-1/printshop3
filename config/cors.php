@@ -19,16 +19,16 @@ return [
 
  'allowed_methods'          => ['GET', 'POST', 'DELETE', 'OPTIONS'],
 
- 'allowed_origins'          => ['https://dziwnykot.pl/calc-test', 'https://wwww.dziwnykot.pl/calc-test', 'https://www.dziwnykot.pl', 'https://dziwnykot.pl'],
+ 'allowed_origins'          => ['https://dziwnykot.pl', 'https://www.dziwnykot.pl', 'https://dziwnykot.pl/calc-test', 'https://www.dziwnykot.pl/calc-test'],
 
- 'allowed_origins_patterns' => [],
+ 'allowed_origins_patterns' => ['/^https?:\/\/(www\.)?dziwnykot\.pl\/[a-z0-9\/-]+$/'],
 
  'allowed_headers'          => ['*'],
 
- 'exposed_headers'          => ['x-inertia'],
+ 'exposed_headers'          => ['X-Inertia'],
 
  'max_age'                  => 0,
 
- 'supports_credentials'     => false,
+ 'supports_credentials'     => true,
 
 ];
