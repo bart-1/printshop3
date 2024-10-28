@@ -9,12 +9,6 @@ const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
 
 import React, { ReactNode } from 'react';
-import ThemeToggleSwitch from "./Components/ThemeToggleSwitch";
-
-interface ThemeProps {
-    children: ReactNode | ReactNode[];
-}
-
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

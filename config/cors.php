@@ -25,10 +25,10 @@ return [
 
  'allowed_headers'          => ['*'],
 
- 'exposed_headers'          => ['X-Inertia'],
+ 'exposed_headers'          => ['x-inertia'],
 
  'max_age'                  => 0,
 
- 'supports_credentials'     => true,
+ 'supports_credentials'     => false,
 
 ];
