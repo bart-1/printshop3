@@ -19,16 +19,12 @@ class Cors
  public function handle($request, Closure $next)
  {
   $headers = [
-   'Access-Control-Allow-Origin'      => 'https://dziwnykot.pl',
-   'Access-Control-Allow-Origin'      => 'https://www.dziwnykot.pl',
-   'Access-Control-Allow-Origin'      => 'https://wwww.dziwnykot.pl/calc-test',
-   'Access-Control-Allow-Origin'      => 'https://dziwnykot.pl/calc-test',
-   'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
+   'Access-Control-Allow-Origin'      =>[ 'https://dziwnykot.pl/calc-test', 'https://dziwnykot.pl', 'https://wwww.dziwnykot.pl/calc-test',  'https://www.dziwnykot.pl'],
+   'Access-Control-Allow-Methods'     => ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE'],
    'Access-Control-Allow-Credentials' => 'false',
    'Access-Control-Max-Age'           => '0',
-   'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With, X-Inertia, X-Inertia-Version',
-   'Accept'                           => 'application/json',
-   'Accept'                           => 'text/javascript',
+   'Access-Control-Allow-Headers'     => ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Inertia', 'X-Inertia-Version'],
+   'Accept'                           => ['application/json', 'text/javascript'],
   ];
 
   if ($request->isMethod('OPTIONS')) {
