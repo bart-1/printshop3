@@ -26,7 +26,7 @@ class Cors
    'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
    'Access-Control-Allow-Credentials' => 'true',
    'Access-Control-Max-Age'           => '0',
-   'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With, X-Inertia, X-Inertia-Version',
+   'Access-Control-Allow-Headers'     => '*, Content-Type, Authorization, X-Requested-With, X-Inertia, X-Inertia-Version',
    'Accept'                           => 'application/json',
    'Accept'                           => 'text/javascript',
   ];
