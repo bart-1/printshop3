@@ -22,11 +22,8 @@ use Inertia\Inertia;
  */
 
 Route::get('/', function () {
- return view('welcome');
+ return redirect('welcome');
 });
-// Route::get('/', function () {
-//  return redirect('welcome');
-// });
 
 Route::get('/welcome', [WelcomeController::class, 'index'])->name('welcome');
 
