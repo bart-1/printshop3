@@ -23,9 +23,9 @@ return [
 
  'allowed_origins_patterns' => ['/^https?:\/\/(www\.)?dziwnykot\.pl\/[a-z0-9\/-]+$/'],
 
- 'allowed_headers'          => ['*'],
+ 'allowed_headers'          => ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Token-Auth', 'X-Inertia', 'X-Inertia-Version', 'Accept', 'Session'],
 
- 'exposed_headers'          => ['x-inertia'],
+ 'exposed_headers'          => ['X-Inertia'],
 
  'max_age'                  => 0,
 
